@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja" id="html">
+<head>
+<meta charset="utf-8">
+<title>PartyRoutette</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" media="screen, tv, print" href="css/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+<script src="js/script.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+.seriesTopic { margin: auto; box-sizing: border-box; width: calc(500px + 2px); display: flex; flex-wrap: wrap; border: 1px solid #666; border-width: 2px 0 0 2px; }
+.containerTopic {width: calc(500px / 6); height: calc(500px / 6); display: flex; border: 1px solid #666; border-width: 0 1px 1px 0; background: #eee; }
+.contentTopic { display: block; width: 100%;  display: flex; align-items: center; padding: 4px; border: 2px solid transparent; text-align: center; }
+.containerTopic.active .contentTopic { background: #fdd; }
+.containerTopic.active.final .contentTopic { border: 2px solid #f88; color: #f88; font-weight: bold; }
+
+.containerTopic:nth-of-type(6n) { border-right-width: 2px }
+.containerTopic:nth-of-type(n + 31) { border-bottom-width: 2px; }
+.contentTopic .textTopic { width: 100%; text-align: center; line-height: 1.2; font-size: 14px; }
+.triggerStart { width: 20%; border-radius: 4px; cursor: pointer; border: 3px solid #aaa; font-size: 40px; }
+.triggerStart:active { background: #fff; }
+</style>
+
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    startRoulette();
+  });
+
+  function startRoulette() {
+    const ctrlStart = document.querySelector('.triggerStart');
+
+    ctrlStart.addEventListener('click', function() {
+      ctrlStart.disabled = true;
+      movementRoulette(ctrlStart);
+    })
+  }
+
+  function movementRoulette(ctrlStart) {
+    const seriesCell = Array.from(document.querySelectorAll('.containerTopic'));
+    const countCellAll = seriesCell.length;
+
+    _randomRoll(2000, 60)
+    .then(function() {
+      return _randomRoll(3000, 200);
+    })
+    .then(function() {
+      return _randomRoll(2000, 800);
+    })
+    .then(function() {
+      return _randomRoll(2000, 1000);
+    })
+    .finally(function() {
+      document.querySelector('.active').classList.add('final')
+      ctrlStart.disabled = false;
+      console.log('END')
+    });
+
+
+    function _randomRoll(duration, interval) {
+      return new Promise(function(resolve) {
+        let timeCompare = new Date();
+
+        let timerLoop = null;
+
+        timerLoop = setInterval(function() {
+          seriesCell.forEach(function(cell) {
+            cell.classList.remove('active');
+            cell.classList.remove('final');
+          });
+
+          const timeCurrent = new Date();
+          const diffTime = timeCurrent - timeCompare;
+
+          const ixCell = generateRandomInt(0, countCellAll - 1)
+          console.log(ixCell);
+
+          const cellTarget = seriesCell[ixCell];
+          cellTarget.classList.add('active');
+
+          if(diffTime > duration) {
+            clearTimeout(timerLoop);
+            resolve();
+          }
+        }, interval);
+      });
+    }
+  }
+
+  function generateRandomInt(min, max) {
+    return Math.floor( Math.random() * (max + 1 - min) ) + min ;
+  }
+})();
+</script>
+
+</head>
+
+<body data-barba="wrapper">
+<div class="talkingtopic" data-barba="container" data-barba-namespace="talkingtopic">
+<header class="containerTitlePage">
+<h1 class="titlePage">PartyRoutette</h1>
+<p class="tagline">新年会</p>
+</header>
+
+
+<main class="demoBinarySwitch twoBytesPerRow" data-barba="container">
+<img class="preload" src="img/switch_denki_dentou_on.png" alt="">
+<img class="preload" src="img/small_star7_yellow.png" alt="">
+
+<button class="ctrl triggerStart">START</button>
+
+<ul class="seriesTopic">
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">ご趣味</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">家族イベント<br>差し支えない範囲</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">カウントダウンイベント？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">なんかガチでやった</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">初詣</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">実家 or 自宅</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">年賀<br>書かん</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">ペット話<br>動物話？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">年末年始<br>TV<br>見てた？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">TV見た？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">なんか<br>作った？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">旅行？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">寝てた？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">正月<br>寒かった？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">ポチ袋</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">運動した？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">一気見した<br>コンテンツ</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">この新年会について思うところ</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">走<br>った</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">飛<br>んだ</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">舞<br>った</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">楽<br>しんだ</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">仕事始め頭働かない系のエピソード</span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">雪の<br>日の<br>出来事</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">おせち？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">寝落ち？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">仕事でやりたいこと</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">個人的にやりたいこと</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">担当案件に<br>ついて<br>なんでも</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">恵比寿<br>出てる？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">帰省</span></span></li>
+</ul>
+
+<!-- /demoBinarySwitch --> </main>
+<!-- /appDemoBinaryOpenworld --> </div>
+
+</body>
+</html>
