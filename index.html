@@ -11,7 +11,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
-<script src="js/script.js"></script>
 
 <style>
 * { box-sizing: border-box; }
@@ -47,6 +46,7 @@
   function movementRoulette(ctrlStart) {
     const seriesCell = Array.from(document.querySelectorAll('.containerTopic'));
 
+    // 「ランダムハイライト & スローダウン」
     _randomRoll(2000, 60)
     .then(function() {
       return _randomRoll(2500, 200);
@@ -60,10 +60,9 @@
     .finally(function() {
       document.querySelector('.active').classList.add('final')
       ctrlStart.disabled = false;
-      console.log('END')
     });
 
-
+    // duration時間 intervalおきにハイライト動作
     function _randomRoll(duration, interval) {
       return new Promise(function(resolve) {
         let timeCompare = new Date();
