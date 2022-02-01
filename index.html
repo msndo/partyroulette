@@ -46,14 +46,13 @@
 
   function movementRoulette(ctrlStart) {
     const seriesCell = Array.from(document.querySelectorAll('.containerTopic'));
-    const countCellAll = seriesCell.length;
 
     _randomRoll(2000, 60)
     .then(function() {
-      return _randomRoll(3000, 200);
+      return _randomRoll(2500, 200);
     })
     .then(function() {
-      return _randomRoll(2000, 800);
+      return _randomRoll(1700, 800);
     })
     .then(function() {
       return _randomRoll(2000, 1000);
@@ -70,28 +69,42 @@
         let timeCompare = new Date();
 
         let timerLoop = null;
+        let ixCellLast = -1;
 
         timerLoop = setInterval(function() {
-          seriesCell.forEach(function(cell) {
-            cell.classList.remove('active');
-            cell.classList.remove('final');
-          });
-
           const timeCurrent = new Date();
           const diffTime = timeCurrent - timeCompare;
 
-          const ixCell = generateRandomInt(0, countCellAll - 1)
-          console.log(ixCell);
-
-          const cellTarget = seriesCell[ixCell];
-          cellTarget.classList.add('active');
+          let ixCellCurrent = _highlightCell(seriesCell);
 
           if(diffTime > duration) {
+            // 重複回避
+            while(ixCellCurrent === ixCellLast) {
+              ixCellCurrent = _highlightCell(seriesCell);
+            }
+
             clearTimeout(timerLoop);
             resolve();
+            return;
           }
+
+          ixCellLast = ixCellCurrent;
         }, interval);
       });
+    }
+
+    function _clearBoard(seriesCell) {
+      seriesCell.forEach(function(cell) {
+        cell.classList.remove('active');
+        cell.classList.remove('final');
+      });
+    };
+
+    function _highlightCell(seriesCell) {
+      _clearBoard(seriesCell);
+      const ixCellCurrent = generateRandomInt(0, seriesCell.length - 1);
+      seriesCell[ixCellCurrent].classList.add('active');
+      return ixCellCurrent;
     }
   }
 
