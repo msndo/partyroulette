@@ -16,15 +16,15 @@
 <style>
 * { box-sizing: border-box; }
 .seriesTopic { margin: auto; box-sizing: border-box; width: calc(500px + 2px); display: flex; flex-wrap: wrap; border: 1px solid #666; border-width: 2px 0 0 2px; }
-.containerTopic {width: calc(500px / 6); height: calc(500px / 6); display: flex; border: 1px solid #666; border-width: 0 1px 1px 0; background: #eee; }
+.containerTopic {width: calc(500px / 6); height: calc(500px / 6); display: flex; border: 1px solid #666; border-width: 0 1px 1px 0; background: #fafafa; }
 .contentTopic { display: block; width: 100%;  display: flex; align-items: center; padding: 4px; border: 2px solid transparent; text-align: center; }
 .containerTopic.active .contentTopic { background: #fdd; }
-.containerTopic.active.final .contentTopic { border: 2px solid #f88; color: #f88; font-weight: bold; }
+.containerTopic.active.final .contentTopic { border: 2px solid #f88; color: #c05; font-weight: bold; }
 
 .containerTopic:nth-of-type(6n) { border-right-width: 2px }
 .containerTopic:nth-of-type(n + 31) { border-bottom-width: 2px; }
 .contentTopic .textTopic { width: 100%; text-align: center; line-height: 1.2; font-size: 14px; }
-.triggerStart { width: 20%; border-radius: 4px; cursor: pointer; border: 3px solid #aaa; font-size: 40px; }
+.triggerStart { width: 20%; border-radius: 8px; cursor: pointer; border: 3px solid #aaa; font-size: 40px; background: #fafafa}
 .triggerStart:active { background: #fff; }
 </style>
 
