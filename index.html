@@ -14,16 +14,22 @@
 
 <style>
 * { box-sizing: border-box; }
+body { background: #fff; }
+.bgWallpaper { position: absolute; left:0; top: 0; z-index: -1; background: url(img/sun.png) center center no-repeat; background-size: cover; opacity: .5;  width: 100vw; height: 100%; filter: blur(5px); }
 .seriesTopic { margin: auto; box-sizing: border-box; width: calc(500px + 2px); display: flex; flex-wrap: wrap; border: 1px solid #666; border-width: 2px 0 0 2px; }
-.containerTopic {width: calc(500px / 6); height: calc(500px / 6); display: flex; border: 1px solid #666; border-width: 0 1px 1px 0; background: #fafafa; }
+.containerTopic {width: calc(500px / 6); height: calc(500px / 6); display: flex; border: 1px solid #666; border-width: 0 1px 1px 0; background: #fff; }
 .contentTopic { display: block; width: 100%;  display: flex; align-items: center; padding: 4px; border: 2px solid transparent; text-align: center; }
-.containerTopic.active .contentTopic { background: #fdd; }
-.containerTopic.active.final .contentTopic { border: 2px solid #f88; color: #c05; font-weight: bold; }
 
-.containerTopic:nth-of-type(6n) { border-right-width: 2px }
-.containerTopic:nth-of-type(n + 31) { border-bottom-width: 2px; }
+.containerTopic:nth-of-type(6n) { border-right-width: 2px; }
+
+.containerTopic:nth-of-type(n + 26) { border-bottom-width: 2px; }
+.containerTopic:last-of-type { border-right-width: 2px; }
+
+.containerTopic.active .contentTopic { background: #fdd; }
+.containerTopic.active.final .contentTopic { border: 2px solid #f88; color: #c05; font-weight: bold; transform: scale(106%); }
+
 .contentTopic .textTopic { width: 100%; text-align: center; line-height: 1.2; font-size: 14px; }
-.triggerStart { width: 20%; border-radius: 8px; cursor: pointer; border: 3px solid #aaa; font-size: 40px; background: #fafafa}
+.triggerStart { width: 20%; border-radius: 8px; cursor: pointer; border: 3px solid #aaa; font-size: 40px; background: #fff; }
 .triggerStart:active { background: #fff; }
 </style>
 
@@ -49,13 +55,13 @@
     // 「ランダムハイライト & スローダウン」
     _randomRoll(2000, 60)
     .then(function() {
-      return _randomRoll(2500, 200);
+      return _randomRoll(1700, 200);
     })
     .then(function() {
-      return _randomRoll(1700, 800);
+      return _randomRoll(2000, 500);
     })
     .then(function() {
-      return _randomRoll(2000, 1000);
+      return _randomRoll(2500, 1500);
     })
     .finally(function() {
       document.querySelector('.active').classList.add('final')
@@ -110,13 +116,21 @@
   function generateRandomInt(min, max) {
     return Math.floor( Math.random() * (max + 1 - min) ) + min ;
   }
+
+  function fullsizeWallpaper() {
+    document.querySelector('.bgWallpaper').style.height = document.body.height + 'px';
+    window.addEventListener('resize', function() {
+      document.querySelector('.bgWallpaper').style.height = document.body.height + 'px';
+    });
+  }
 })();
 </script>
 
 </head>
 
 <body data-barba="wrapper">
-<div class="talkingtopic" data-barba="container" data-barba-namespace="talkingtopic">
+<!-- <div class="bgWallpaper"></div> -->
+<div class="containerPageContent talkingtopic" data-barba="container" data-barba-namespace="talkingtopic">
 <header class="containerTitlePage">
 <h1 class="titlePage">PartyRoulette</h1>
 <p class="tagline">新年会</p>
@@ -136,22 +150,22 @@
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">なんかガチでやった</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">初詣</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">実家 or 自宅</span></span></li>
-<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">年賀<br>書かん</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">年賀<br>書いた・書かん</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">ペット話<br>動物話？</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">年末年始<br>TV<br>見てた？</span></span></li>
-<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">TV見た？</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">デジタル<br>デトックス？</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">なんか<br>作った？</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">旅行？</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">寝てた？</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">正月<br>寒かった？</span></span></li>
-<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">ポチ袋</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">お年玉</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">運動した？</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">一気見した<br>コンテンツ</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">この新年会について思うところ</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">走<br>った</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">飛<br>んだ</span></span></li>
-<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">舞<br>った</span></span></li>
-<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">楽<br>しんだ</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">歩<br>いた</span></span></li>
+<li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">出前！</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">仕事始め頭働かない系のエピソード</span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">雪の<br>日の<br>出来事</span></span></li>
 <li class="containerTopic"><span class="contentTopic" href="javascript:void(0);"><span class="textTopic">おせち？</span></span></li>
